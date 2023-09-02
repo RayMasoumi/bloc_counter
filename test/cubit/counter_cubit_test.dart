@@ -2,6 +2,7 @@
 
 //#2 then we make a main method:
 import 'package:bloc_counter/cubit/counter_cubit.dart';
+import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -20,12 +21,38 @@ void main() {
       counterCubit.close();
     });
 
-    //#5 running the test:
+    //#5 running the test for initial state:
     test(
         'the initial state of the counterCubit is CounterState(CounterValue : 0)',
         () {
       expect(counterCubit.state,
           const CounterState(counterValue: 0, isIncremented: true));
     });
+
+    //# testing increment() and decrement() methods:
+    //#>> we're testing the output as a reponse to these functions so we'll use this method:
+    // * increment func test
+    blocTest(
+      'when cubit.increment is called the cubit should emit  a CounterState(counterValue:1, isIncremented: true',
+      build: () =>
+          counterCubit, //# returns the current instance of counterCubit so we can use it in test
+      act: (cubit) => cubit
+          .increment(), //# takes a cubit and returns the action that was applied on it
+      expect: () => [
+        const CounterState(counterValue: 1, isIncremented: true),
+      ], //#checks the order to test the result
+    );
+
+    // * decrement func test
+    blocTest(
+      'when cubit.decrement is called the cubit should emit  a CounterState(counterValue:-1, isIncremented: false',
+      build: () =>
+          counterCubit, //# returns the current instance of counterCubit so we can use it in test
+      act: (cubit) => cubit
+          .decrement(), //# takes a cubit and returns the action that was applied on it
+      expect: () => [
+        const CounterState(counterValue: -1, isIncremented: false),
+      ], //#checks the order to test the result
+    );
   });
 }
