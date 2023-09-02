@@ -1,7 +1,7 @@
 //#1 we need everything to be tested so we make symmetrical directories in test directory to test every feature
 
 //#2 then we make a main method:
-import 'package:bloc_counter/cubit/counter_cubit.dart';
+import 'package:bloc_counter/logic/cubit/counter_cubit.dart';
 import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
