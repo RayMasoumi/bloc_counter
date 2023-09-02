@@ -25,7 +25,7 @@ void main() {
         'the initial state of the counterCubit is CounterState(CounterValue : 0)',
         () {
       expect(counterCubit.state,
-          CounterState(counterValue: 0, isIncremented: true));
+          const CounterState(counterValue: 0, isIncremented: true));
     });
   });
 }
