@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // * we want the CounterCubit we made to be available throughout the who app so we wrap the root of the app (MaterialApp) in a blocProvider
+    // * we want the CounterCubit we made to be available throughout the whole app so we wrap the root of the app (MaterialApp) in a blocProvider
     return BlocProvider(
       create: (context) =>
           CounterCubit(), // * we take the context of the app and return a counterCubit instance
