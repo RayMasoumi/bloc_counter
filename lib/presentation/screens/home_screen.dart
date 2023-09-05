@@ -100,7 +100,7 @@ class HomeScreenState extends State<HomeScreen> {
             ),
             MaterialButton(
               onPressed: () {
-                // * navigate by named routes:
+                // * navigate by named routes/generated routes:
                 Navigator.pushNamed(context, '/second');
                 // * navigate using anonymous routes:
                 // Navigator.of(context).push(
@@ -115,7 +115,7 @@ class HomeScreenState extends State<HomeScreen> {
             ),
             MaterialButton(
               onPressed: () {
-                // * navigate by named routes:
+                // * navigate by named routes/generated routes:
                 Navigator.pushNamed(context, '/third');
                 // * navigate using anonymous routes:
                 // Navigator.of(context).push(
