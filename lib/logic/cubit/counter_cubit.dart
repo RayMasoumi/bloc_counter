@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc_counter/constants/enums.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'internet_cubit.dart';
@@ -18,13 +19,7 @@ class CounterCubit extends Cubit<CounterState> {
             const CounterState(counterValue: 0, isIncremented: true)) {
     //# we subscribe to internetCubit stream and listen to it:
     internetStreamSubscription = internetCubit.stream.listen((internetState) {
-      if (internetState is InternetConnected &&
-          internetState.connectionType == ConnectionType.mobile) {
-        increment();
-      } else if (internetState is InternetConnected &&
-          internetState.connectionType == ConnectionType.wifi) {
-        decrement();
-      }
+      monitorInternetCubit(internetState);
     });
   }
 
@@ -37,6 +32,16 @@ class CounterCubit extends Cubit<CounterState> {
       );
   void decrement() => emit(
       CounterState(counterValue: state.counterValue - 1, isIncremented: false));
+
+  void monitorInternetCubit(InternetState internetState) {
+    if (internetState is InternetConnected &&
+        internetState.connectionType == ConnectionType.mobile) {
+      increment();
+    } else if (internetState is InternetConnected &&
+        internetState.connectionType == ConnectionType.wifi) {
+      decrement();
+    }
+  }
 
   //# canceling subscription:
   @override
