@@ -1,35 +1,32 @@
+import 'package:bloc_counter/logic/cubit/counter_cubit.dart';
 import 'package:bloc_counter/presentation/router/app_router.dart';
 import 'package:flutter/material.dart';
-
-//!!!!!!!!!!A BETTER WAY!!!!!!!!!!!!!!!!!!!!:
-//! we can use a single cubit/bloc for a whole app instead of passing its value(using BlocProvider.value) to each screen one by one
-//! instead>> we can access it globally:
-//# to do that>> we only need to wrap the MaterialApp widget inside a BlocProvider
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+class MyApp extends StatelessWidget {
+  MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   final AppRouter _appRouter = AppRouter();
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    // * making the only instance of cubit available to the whole project:
+    return BlocProvider<CounterCubit>(
+      create: (context) => CounterCubit(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        onGenerateRoute:
+            _appRouter.onGenerateRoute, //# we pass the function as an argument
       ),
-      onGenerateRoute:
-          _appRouter.onGenerateRoute, //# we pass the function as an argument
     );
   }
 }
