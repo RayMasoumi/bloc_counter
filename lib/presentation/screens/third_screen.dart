@@ -3,17 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../logic/cubit/counter_cubit.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key, required this.title, required this.color});
+class ThirdScreen extends StatefulWidget {
+  const ThirdScreen({super.key, required this.title, required this.color});
 
   final String title;
   final Color color;
 
   @override
-  HomeScreenState createState() => HomeScreenState();
+  ThirdScreenState createState() => ThirdScreenState();
 }
 
-class HomeScreenState extends State<HomeScreen> {
+class ThirdScreenState extends State<ThirdScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,36 +97,6 @@ class HomeScreenState extends State<HomeScreen> {
                   child: const Icon(Icons.add),
                 ),
               ],
-            ),
-            MaterialButton(
-              onPressed: () {
-                // * navigate by named routes:
-                Navigator.pushNamed(context, '/second');
-                // * navigate using anonymous routes:
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //     builder: (context) => const SecondScreen(
-                //         title: 'second screen', color: Colors.redAccent),
-                //   ),
-                // );
-              },
-              color: Colors.redAccent,
-              child: const Text('move to the second screen'),
-            ),
-            MaterialButton(
-              onPressed: () {
-                // * navigate by named routes:
-                Navigator.pushNamed(context, '/third');
-                // * navigate using anonymous routes:
-                // Navigator.of(context).push(
-                //   MaterialPageRoute(
-                //     builder: (context) => const SecondScreen(
-                //         title: 'third screen', color: Colors.greenAccent),
-                //   ),
-                // );
-              },
-              color: Colors.greenAccent,
-              child: const Text('move to the third screen'),
             ),
           ],
         ),

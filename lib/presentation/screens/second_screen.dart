@@ -19,6 +19,7 @@ class SecondScreenState extends State<SecondScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        backgroundColor: widget.color,
       ),
       body: Center(
         child: Column(
@@ -82,6 +83,7 @@ class SecondScreenState extends State<SecondScreen> {
                     // context.bloc<CounterCubit>().decrement();
                   },
                   tooltip: 'Decrement',
+                  backgroundColor: widget.color,
                   child: const Icon(Icons.remove),
                 ),
                 FloatingActionButton(
@@ -91,15 +93,11 @@ class SecondScreenState extends State<SecondScreen> {
                     // context.bloc<CounterCubit>().increment();
                   },
                   tooltip: 'Increment',
+                  backgroundColor: widget.color,
                   child: const Icon(Icons.add),
                 ),
               ],
             ),
-            MaterialButton(
-              onPressed: () {},
-              color: widget.color,
-              child: const Text('move to the second screen'),
-            )
           ],
         ),
       ),

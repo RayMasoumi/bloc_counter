@@ -6,7 +6,7 @@ import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  //#3 we create a group which is a way to organise a test for multiple features: for example now that we are in counter cubit directory we need to add all the necessary tests for the counter feature here:
+  //#3 we create a group which is a way to organize a test for multiple features: for example now that we are in counter cubit directory we need to add all the necessary tests for the counter feature here:
   group('CounterCubit', () {
     //#4 then set a setup and teardown function for each test:
     //# setup: is used to instantiate the objects our test will be working with, so we can access it later
@@ -16,7 +16,7 @@ void main() {
       counterCubit = CounterCubit();
     });
 
-    //# a function that will be called whenever each test is run >> so we can  close the created cubit in it
+    //# a function that will be called whenever each test is run >> so we can close the created cubit in it
     tearDown(() {
       counterCubit.close();
     });
@@ -30,7 +30,7 @@ void main() {
     });
 
     //# testing increment() and decrement() methods:
-    //#>> we're testing the output as a reponse to these functions so we'll use this method:
+    //#>> we're testing the output as a response to these functions so we'll use this method:
     // * increment func test
     blocTest(
       'when cubit.increment is called the cubit should emit  a CounterState(counterValue:1, isIncremented: true',
