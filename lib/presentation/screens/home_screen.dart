@@ -29,6 +29,9 @@ class HomeScreenState extends State<HomeScreen> {
             children: <Widget>[
               BlocBuilder<InternetCubit, InternetState>(
                 builder: (internetCubitBuilderContext, state) {
+                  if (state is InternetConnected) {
+                    Text(state.connectionType.toString());
+                  }
                   if (state is InternetConnected &&
                       state.connectionType == ConnectionType.wifi) {
                     return const Text(

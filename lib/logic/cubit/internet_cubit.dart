@@ -17,26 +17,7 @@ class InternetCubit extends Cubit<InternetState> {
   //# also we want to react based on connectivity status so we pass it in as an argument to internetCubit:
   InternetCubit({required this.connectivity}) : super(InternetLoading()) {
     // * subscribing to the stream and listening to it:
-    connectivityStreamSubscription = monitorInternetConnection();
-  }
-
-  //# Be sure to cancel subscription after you are done
-  @override
-  Future<void> close() {
-    connectivityStreamSubscription.cancel();
-    return super.close();
-  }
-
-  //# methods to emit different states:
-// * connected state:
-  void emitInternetConnected(ConnectionType connectionType) =>
-      InternetConnected(connectionType: connectionType);
-
-// * emit disconnected state:
-  void emitInternetDisconnected() => InternetDisconnected();
-//# monitor method:
-  StreamSubscription<ConnectivityResult> monitorInternetConnection() {
-    return connectivity.onConnectivityChanged
+    connectivityStreamSubscription = connectivity.onConnectivityChanged
         .listen((ConnectivityResult connectivityResult) {
       // * Got a new connectivity status!
       if (connectivityResult == ConnectivityResult.mobile) {
@@ -51,4 +32,19 @@ class InternetCubit extends Cubit<InternetState> {
       }
     });
   }
+
+  //# Be sure to cancel subscription after you are done
+  @override
+  Future<void> close() {
+    connectivityStreamSubscription.cancel();
+    return super.close();
+  }
 }
+
+//# methods to emit different states:
+// * connected state:
+void emitInternetConnected(ConnectionType connectionType) =>
+    InternetConnected(connectionType: connectionType);
+
+// * emit disconnected state:
+void emitInternetDisconnected() => InternetDisconnected();
