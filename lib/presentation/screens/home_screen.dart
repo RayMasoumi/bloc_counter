@@ -133,6 +133,30 @@ class HomeScreenState extends State<HomeScreen> {
                   color: Colors.greenAccent,
                   child: const Text('move to the third screen'),
                 ),
+                //# using bloc.watch to observe its parameters states and rebuild the returned widget whenever one of the states is emitted:
+                Builder(
+                  // * first we got to wrap it with a builder (to provide context ig)
+                  builder: (context) {
+                    final counterState = context.watch<CounterCubit>().state;
+                    final internetState = context.watch<InternetCubit>().state;
+
+                    if (internetState is InternetConnected &&
+                        internetState.connectionType == ConnectionType.mobile) {
+                      return Text(
+                        'Counter: ${counterState.counterValue} Internet: Mobile',
+                      );
+                    } else if (internetState is InternetConnected &&
+                        internetState.connectionType == ConnectionType.wifi) {
+                      return Text(
+                        'Counter: ${counterState.counterValue} Internet: Wifi',
+                      );
+                    } else {
+                      return Text(
+                        'Counter: ${counterState.counterValue} Internet: Disconnected',
+                      );
+                    }
+                  },
+                ),
               ],
             ),
           )),

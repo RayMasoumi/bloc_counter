@@ -34,10 +34,11 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<InternetCubit>(
-          create: (context) => InternetCubit(connectivity: connectivity),
+          create: (internetCubitContext) =>
+              InternetCubit(connectivity: connectivity),
         ),
         BlocProvider<CounterCubit>(
-          create: (context) => CounterCubit(
+          create: (counterCubitContext) => CounterCubit(
               // internetCubit: BlocProvider.of<InternetCubit>(context),
               ),
         ),
