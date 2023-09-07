@@ -8,6 +8,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'internet_state.dart';
 
 class InternetCubit extends Cubit<InternetState> {
+  //# methods to emit different states:
+// * connected state:
+  void emitInternetConnected(ConnectionType connectionType) =>
+      emit(InternetConnected(connectionType: connectionType));
+
+// * disconnected state
+  void emitInternetDisconnected() => emit(InternetDisconnected());
+
   //# we want the cubit to communicate with Connectivity_plus package
   //# >> to do that we need to subscribe to its stream and listen to it:
   final Connectivity connectivity;
@@ -21,12 +29,15 @@ class InternetCubit extends Cubit<InternetState> {
         .listen((ConnectivityResult connectivityResult) {
       // * Got a new connectivity status!
       if (connectivityResult == ConnectivityResult.mobile) {
+        print('Mobile');
         // I am connected to a mobile network:
         emitInternetConnected(ConnectionType.mobile);
       } else if (connectivityResult == ConnectivityResult.wifi) {
+        print('wifi');
         // I am connected to a wifi network.
         emitInternetConnected(ConnectionType.wifi);
       } else if (connectivityResult == ConnectivityResult.none) {
+        print('disconnected');
         // I am not connected to network.
         emitInternetDisconnected();
       }
@@ -40,11 +51,3 @@ class InternetCubit extends Cubit<InternetState> {
     return super.close();
   }
 }
-
-//# methods to emit different states:
-// * connected state:
-void emitInternetConnected(ConnectionType connectionType) =>
-    InternetConnected(connectionType: connectionType);
-
-// * emit disconnected state:
-void emitInternetDisconnected() => InternetDisconnected();
